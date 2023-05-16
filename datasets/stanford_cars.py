@@ -17,14 +17,13 @@ class StanfordCars(DatasetBase):
         root = os.path.abspath(os.path.expanduser(cfg.DATASET.ROOT))
         self.dataset_dir = os.path.join(root, self.dataset_dir)
         self.split_path = os.path.join(self.dataset_dir, "split_zhou_StanfordCars.json")
-        print(self.split_path)
-        print(os.path.exists(self.split_path))
         self.split_fewshot_dir = os.path.join(self.dataset_dir, "split_fewshot")
         mkdir_if_missing(self.split_fewshot_dir)
 
-        if os.path.exists(self.split_path):
+        if False and os.path.exists(self.split_path):
             train, val, test = OxfordPets.read_split(self.split_path, self.dataset_dir)
         else:
+            print("splitting manually")
             trainval_file = os.path.join(self.dataset_dir, "devkit", "cars_train_annos.mat")
             test_file = os.path.join(self.dataset_dir, "cars_test_annos_withlabels.mat")
             meta_file = os.path.join(self.dataset_dir, "devkit", "cars_meta.mat")
