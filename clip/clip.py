@@ -114,7 +114,14 @@ def load(name: str, device: Union[str, torch.device] = "cuda" if torch.cuda.is_a
 
     try:
         # loading JIT archive
-        model = torch.jit.load(model_path, map_location=device if jit else "cpu").eval()
+        if "OpenCLIP" in name:
+            model, _, preprocess = open_clip.create_model_and_transforms('ViT-B-16', pretrained='laion2b_s34b_b88k', device=device if jit else "cpu")
+            model.eval()
+            print("Using Open Clip  " + device)
+        else:
+            model = torch.jit.load(model_path, map_location=device if jit else "cpu").eval()
+            print("Using OpenAI Clip")
+        # model = torch.jit.load(model_path, map_location=device if jit else "cpu").eval()
         state_dict = None
     except RuntimeError:
         # loading saved state dict

@@ -26,7 +26,7 @@ TRAIN:
 
 MODEL:
   BACKBONE:
-    NAME: "ViT-B/16"
+    NAME: "OpenCLIP-ViT-B/16"
 
 TRAINER:
   COOP:
