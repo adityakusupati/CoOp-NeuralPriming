@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # custom config
-DATA=/path/to/datasets
+DATA=/data/yfcc-tmp/data/TPT-datasets-softlinks/
 TRAINER=CoOp
 
 DATASET=$1
