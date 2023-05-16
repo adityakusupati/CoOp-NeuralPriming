@@ -18,13 +18,14 @@ _tokenizer = _Tokenizer()
 
 def load_clip_to_cpu(cfg):
     backbone_name = cfg.MODEL.BACKBONE.NAME
-    url = clip._MODELS[backbone_name]
-    model_path = clip._download(url)
+    if "OpenCLIP" not in backbone_name:
+        url = clip._MODELS[backbone_name]
+        model_path = clip._download(url)
 
     try:
         # loading JIT archive
         if "OpenCLIP" in backbone_name:
-            model, _, preprocess = open_clip.create_model_and_transforms('ViT-B-16', pretrained='laion2b_s34b_b88k', device=device if jit else "cpu")
+            model, _, preprocess = open_clip.create_model_and_transforms('ViT-B-16', pretrained='laion2b_s34b_b88k', device="cuda")
             model.eval()
             print("Using Open Clip  " + device)
         else:
