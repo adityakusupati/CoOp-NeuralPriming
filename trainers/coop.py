@@ -28,7 +28,7 @@ def load_clip_to_cpu(cfg):
         if "OpenCLIP" in backbone_name:
             model, _, preprocess = open_clip.create_model_and_transforms('ViT-B-16', pretrained='laion2b_s34b_b88k', device="cuda")
             model.eval()
-            print("Using Open Clip  " + device)
+            print("Using Open Clip")
         else:
             model = torch.jit.load(model_path, map_location=device if jit else "cpu").eval()
             print("Using OpenAI Clip")
